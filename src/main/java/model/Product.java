@@ -8,6 +8,10 @@ public class Product {
     private long cost;
     private ProductType productType;
 
+    public Product() {
+
+    }
+
     @Override
     public String toString() {
         return "Product{" +
@@ -25,6 +29,7 @@ public class Product {
         this.cost = cost;
         this.productType = productType;
     }
+
 
     public void setId(UUID id) {
         this.id = id;

@@ -8,6 +8,10 @@ public class Customer {
     private String phone;
     private long age;
 
+    public Customer() {
+
+    }
+
     @Override
     public String toString() {
         return "Customer{" +

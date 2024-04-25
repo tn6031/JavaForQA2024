@@ -1,32 +1,33 @@
 package ru.shop.service;
 
-import repository.IRepository;
+import exeption.EntityNotFoundException;
 import repository.ProductRepository;
 import  model.ProductType;
 import model.Product;
-import repository.ProductRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
-public class ProductService implements IProductService<Product> {
+public class ProductService {
 
-    private final IRepository<Product> repository;
-    public ProductService(IRepository<Product> repository) {
+    private final ProductRepository repository;
+    public ProductService(ProductRepository repository) {
         this.repository = repository;
     }
 
-    @Override
+
     public void save(Product product) {
         repository.save(product);
     }
 
-    @Override
+
     public List<Product> findAll() {
         return repository.findALL();
     }
 
-    @Override
+
     public List<Product> findByType(ProductType productType) {
         List<Product> result = new ArrayList<>();
         for (Product product : findAll()) {
@@ -37,4 +38,10 @@ public class ProductService implements IProductService<Product> {
         return result;
     }
 
+    public Optional<Product> findById(UUID id) {
+        return repository.findById(id);
+    }
+public Product getbyId(UUID id) {
+        return repository.findById(id).orElseThrow(EntityNotFoundException::new);
+}
 }

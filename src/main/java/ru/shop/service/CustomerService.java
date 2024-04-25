@@ -1,32 +1,36 @@
 package ru.shop.service;
 
+import exeption.EntityNotFoundException;
 import model.Customer;
-import model.Product;
-import model.ProductType;
 import repository.CustomerRepository;
-import repository.IRepository;
-import repository.ProductRepository;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
-public class CustomerService implements ICustomerService<Customer> {
+public class CustomerService  {
 
-    private final IRepository<Customer> repository;
-    public CustomerService(IRepository<Customer> repository) {
+    private final CustomerRepository repository;
+    public CustomerService(CustomerRepository repository) {
         this.repository = repository;
     }
 
-    @Override
+
     public void save(Customer product) {
         repository.save(product);
     }
 
-    @Override
+
     public List<Customer> findAll() {
         return repository.findALL();
     }
 
+public Optional<Customer> findById(UUID id) {
 
+    return repository.findById(id);
+}
 
+    public Customer getbyId(UUID id) {
+        return repository.findById(id).orElseThrow(EntityNotFoundException::new);
+    }
 }
